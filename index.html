@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Link de Download</title>
+</head>
+<body>
+
+    <h1>Gerador de Link de Download</h1>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="fileInput">Escolha um arquivo:</label>
+        <input type="file" id="fileInput" name="fileInput" accept=".txt, .pdf, .docx"><!-- Adicione outros tipos de arquivo se necessário -->
+        <br>
+        <button type="button" onclick="generateDownloadLink()">Gerar Link de Download</button>
+    </form>
+
+    <div id="downloadLinkContainer" style="display:none;">
+        <h2>Link de Download:</h2>
+        <a id="downloadLink" download>Download</a>
+    </div>
+
+    <script>
+        function generateDownloadLink() {
+            var fileInput = document.getElementById('fileInput');
+            var downloadLinkContainer = document.getElementById('downloadLinkContainer');
+            var downloadLink = document.getElementById('downloadLink');
+
+            if (fileInput.files.length > 0) {
+                var file = fileInput.files[0];
+                var objectURL = URL.createObjectURL(file);
+
+                downloadLink.href = objectURL;
+                downloadLink.download = file.name;
+                downloadLinkContainer.style.display = 'block';
+            } else {
+                alert('Por favor, selecione um arquivo antes de gerar o link de download.');
+            }
+        }
+    </script>
+
+</body>
+</html>
